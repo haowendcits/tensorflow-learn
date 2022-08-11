@@ -129,3 +129,9 @@ dmypy.json
 .pyre/
 
 saved_model/
+
+*.ipynb_checkpoints
+*.zip
+
+*logs*
+*models*
