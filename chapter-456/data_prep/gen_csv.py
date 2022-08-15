@@ -29,7 +29,7 @@ sets = ["train", "val"]
 class_dict = {}
 class_index = 0
 
-def read_annotation(image_path, anno_list):
+def read_annotation(image_path: str, anno_list):
     global class_index, class_dict
     in_file = os.path.splitext(image_path)[0] + ".xml"
 
@@ -56,6 +56,7 @@ def read_annotation(image_path, anno_list):
         y1 = int(xmlbox.find("ymin").text)
         y2 = int(xmlbox.find("ymax").text)
 
+        image_path = image_path.replace("\\", "/")
         bbox_list.append([x1, y1, x2, y2])
         anno_list.append([image_path.split("/")[-1], str(x1), str(y1), str(x2), str(y2), cls])
 
@@ -86,14 +87,15 @@ def main(args=None):
             print("Currently processing: %s" % image_path)
             cls_list, bbox_list, anno_list = read_annotation(image_path, anno_list)
             print("%s Done!" % image_path)
-        with open(csv_path, "w") as f:
+        with open(csv_path, "w", newline='') as f:
             writer = csv.writer(f)
+            
             for row in anno_list:
                 writer.writerow(row)
 
     class_csv_path = os.path.join(data_dir, "class.csv")
 
-    with open(class_csv_path, "w") as f:
+    with open(class_csv_path, "w", newline='') as f:
         writer = csv.writer(f)
         for k, v in class_dict.items():
             writer.writerow([k, str(v)])

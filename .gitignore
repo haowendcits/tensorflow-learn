@@ -137,3 +137,4 @@ saved_model/
 *models*
 
 data/
+*.h5
