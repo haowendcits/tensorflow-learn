@@ -1,0 +1,3 @@
+[submodule "chapter-456/keras-retinanet"]
+	path = chapter-456/keras-retinanet
+	url = https://github.com/fizyr/keras-retinanet
